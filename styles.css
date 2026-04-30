@@ -297,3 +297,27 @@ body {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+.item-label-clickable {
+    cursor: pointer;
+    transition: color 0.2s;
+    user-select: none;
+}
+
+.item-label-clickable:hover {
+    color: var(--primary-color);
+}
+
+.copy-feedback {
+    color: var(--accent-color);
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+    font-weight: 600;
+    animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}

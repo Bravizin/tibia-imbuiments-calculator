@@ -97,6 +97,16 @@
             const [selectedType, setSelectedType] = useState('vida');
             const [goldTokenPrice, setGoldTokenPrice] = useState('');
             const [itemPrices, setItemPrices] = useState({});
+            const [copiedItem, setCopiedItem] = useState(null);
+
+            const copyToClipboard = (text) => {
+                navigator.clipboard.writeText(text).then(() => {
+                    setCopiedItem(text);
+                    setTimeout(() => setCopiedItem(null), 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            };
 
             const handleItemPriceChange = (id, value) => {
                 setItemPrices(prev => ({
@@ -153,8 +163,14 @@
                                 <div className="input-group-list">
                                     {currentImbuement.items.map(item => (
                                         <div className="input-group" key={item.id}>
-                                            <label>
-                                                <span className="item-qty">{item.qty}x</span> {item.name}
+                                            <label 
+                                                className="item-label-clickable" 
+                                                onClick={() => copyToClipboard(item.name)}
+                                                title="Clique para copiar o nome"
+                                            >
+                                                <span className="item-qty">{item.qty}x</span> 
+                                                <span className="item-name-text">{item.name}</span>
+                                                {copiedItem === item.name && <span className="copy-feedback">✓ Copiado</span>}
                                             </label>
                                             <div className="input-wrapper">
                                                 <input 
